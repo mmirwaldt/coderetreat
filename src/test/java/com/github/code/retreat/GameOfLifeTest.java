@@ -8,29 +8,34 @@ public class GameOfLifeTest {
     GameOfLife gameOfLife = new GameOfLife();
 
     @Test
-    void testWillSurviveWhenThreeNeighborsIsLife() {
-        assertTrue(gameOfLife.willSurvive(3));
+    void testCellHasNoNeighbors(){
+        CellState[][] board = new CellState[][]{
+                {CellState.DEAD,CellState.DEAD,CellState.DEAD},
+                {CellState.DEAD,CellState.LIFE,CellState.DEAD},
+                {CellState.DEAD,CellState.DEAD,CellState.DEAD}
+        };
+        assertEquals(0,gameOfLife.countNeighbors(board));
     }
 
     @Test
-    void testWillSurviveWhenZeroNeighborsIsLife() {
-        assertFalse(gameOfLife.willSurvive(0));
+    void testCellHasOneNeighbor(){
+        CellState[][] board = new CellState[][]{
+                {CellState.LIFE,CellState.DEAD,CellState.DEAD},
+                {CellState.DEAD,CellState.LIFE,CellState.DEAD},
+                {CellState.DEAD,CellState.DEAD,CellState.DEAD}
+        };
+        assertEquals(1,gameOfLife.countNeighbors(board));
     }
 
 
     @Test
-    void testWillSurviveWhenFiveNeighborsIsLife() {
-        assertFalse(gameOfLife.willSurvive(5));
-    }
-
-    @Test
-    void testWillSurviveWhenTwoNeighborsIsLife() {
-        assertFalse(gameOfLife.willSurvive(2));
-    }
-
-    @Test
-    void testWillSurviveWhenMinusOneNeighborsIsLife() {
-        assertThrows(IllegalArgumentException.class,()->gameOfLife.willSurvive(-1));
+    void testCellHasEightNeighbor(){
+        CellState[][] board = new CellState[][]{
+                {CellState.LIFE,CellState.LIFE,CellState.LIFE},
+                {CellState.LIFE,CellState.LIFE,CellState.LIFE},
+                {CellState.LIFE,CellState.LIFE,CellState.LIFE}
+        };
+        assertEquals(8,gameOfLife.countNeighbors(board));
     }
 
 }
